@@ -5,28 +5,28 @@
 - Setup laravel project
 
 ```php
-    composer create-project laravel/laravel search
+composer create-project laravel/laravel search
 ```
 - Install node
 ```
-    sudo apt update
-    sudo apt install nodejs
+sudo apt update
+sudo apt install nodejs
 ```
 - Install Vue
 ```
-    npm install vue@next
+npm install vue@next
 ```
 - Installing Inertia
 ```
-    composer require inertiajs/inertia-laravel
+composer require inertiajs/inertia-laravel
 ```
 
 ### Run Server
 
 - Start Xampp
 ```
-    npm run dev
-    php artisan serve
+npm run dev
+php artisan serve
 ```
 
 ### Navigating the app
@@ -37,6 +37,9 @@
 #### Migrate Database 
 
 ```
-    php artisan migrate:refresh --seed
+php artisan migrate:refresh --seed
 ```
 
+#### Database Configuration
+
+* Database Name - laravel
