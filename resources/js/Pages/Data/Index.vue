@@ -1,11 +1,13 @@
 <template>
   <AppLayout title="Index">
+    
     <template #header>
       <div class="search-container">
-        <input type="text" v-model="searchQuery" placeholder="Search" ref="searchInput">
-        <button @click="search()">Search</button>
+        <input type="text" v-model="state.searchQuery" placeholder="Search" ref="searchInput">
+        <button @click="search">Search</button> 
       </div>
     </template>
+
     <div class="tables-container">
       <div class="table">
         <h2>Customers</h2>
@@ -20,7 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="customer in filteredCustomers" :key="customer.id">
+            <tr v-for="customer in customers" :key="customer.id">
               <td>{{ customer.id }}</td>
               <td>{{ customer.first_name }}</td>
               <td>{{ customer.last_name }}</td>
@@ -45,7 +47,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="ticket in filteredTickets" :key="ticket.id">
+            <tr v-for="ticket in tickets" :key="ticket.id">
               <td>{{ ticket.id }}</td>
               <td>{{ ticket.title }}</td>
               <td>{{ ticket.description }}</td>
@@ -73,7 +75,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="payment in filteredPayments" :key="payment.id">
+            <tr v-for="payment in payments" :key="payment.id">
               <td>{{ payment.id }}</td>
               <td>{{ payment.transaction_code }}</td>
               <td>{{ payment.first_name }}</td>
@@ -90,80 +92,51 @@
   </AppLayout>
 </template>
 
-
-
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import AppLayout from '../../Layouts/AppLayout.vue';
+import { Inertia } from '@inertiajs/inertia';
 
 export default defineComponent({
-    props: {
-        users: {
-            type: Array,
-            required: true,
-        },
-        customers: {
-            type: Array,
-            required: true,
-        },
-        tickets: {
-            type: Array,
-            required: true,
-        },
-        payments: {
-            type: Array,
-            required: true,
-        },
-    },
-    data() {
-        return {
-            searchQuery: '',
-        };
-    },
-    computed: {
-        filteredCustomers() {
-            return this.customers.filter((customer) =>
-                customer.first_name.toLowerCase().includes(this.searchQuery.toLowerCase())
-                || customer.last_name.toLowerCase().includes(this.searchQuery.toLowerCase())
-            );
-        },
-        // filteredTickets() {
-        //     return this.tickets.filter((ticket) =>
-        //         ticket.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-        //         || ticket.description.toLowerCase().includes(this.searchQuery.toLowerCase())
-        //     );
-        // },
-
-        filteredTickets() {
-  return this.tickets.filter((ticket) =>
-    ticket.title.toLowerCase().includes(this.searchQuery.toLowerCase())
-    || ticket.description.toLowerCase().includes(this.searchQuery.toLowerCase())
-    || (ticket.scheduled_date && ticket.scheduled_date.toString().includes(this.searchQuery))
-  );
+  props: {
+  customers: {
+    type: Array,
+    required: true,
+  },
+  tickets: {
+    type: Array,
+    required: true,
+  },
+  payments: {
+    type: Array,
+    required: true,
+  },
 },
 
-        // filteredPayments() {
-        //     return this.payments.filter((payment) =>
-        //         payment.first_name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        //         || payment.last_name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        //     );
-        // },
+  setup(props) {
+    const state = reactive({
+      searchQuery: '',
+      customers: props.customers,
+      tickets: props.tickets,
+      payments: props.payments,
+    });
 
-        filteredPayments() {
-  return this.payments.filter((payment) =>
-    payment.first_name.toLowerCase().includes(this.searchQuery.toLowerCase())
-    || payment.last_name.toLowerCase().includes(this.searchQuery.toLowerCase())
-    || payment.amount.toString().includes(this.searchQuery)
-  );
-},
-    },
-    methods: {
-        search() {
-            this.$refs.searchInput.focus();
-        },
-    },
-    components: {
-        AppLayout,
-    },
+    const search = () => {
+    Inertia.get('/search', { q: state.searchQuery }).then((response) => {
+        state.customers = response.customers;
+        state.tickets = response.tickets;
+        state.payments = response.payments;
+    });
+};
+
+
+    return {
+      state,
+      search,
+    };
+  },
+  components: {
+    AppLayout,
+  },
 });
 </script>

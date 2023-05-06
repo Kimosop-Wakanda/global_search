@@ -17,6 +17,7 @@ use App\Http\Controllers\GlobalSearchController;
 // use Inertia\Inertia;
 // use Illuminate\Support\Facades\Route;
 
+
 Route::get('/', function () {
     return redirect('/welcome');
 });
@@ -51,9 +52,9 @@ Route::middleware([
 });
 
 //Route to show the product
-Route::get('{slug}', function () {
-    return Inertia::render('ProductShow')->name('products.show');
-});
+// Route::get('{slug}', function () {
+//     return Inertia::render('ProductShow')->name('products.show');
+// });
 
 //Route to submit a new product and redirect to show it
 Route::post('products/create', function (Request $request) {
