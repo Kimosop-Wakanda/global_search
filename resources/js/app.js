@@ -21,22 +21,3 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
-
-// import { createApp, h } from 'vue';
-// import { createInertiaApp } from '@inertiajs/inertia-vue3';
-// import { InertiaProgress } from '@inertiajs/progress';
-
-// const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
-
-// createInertiaApp({
-//   resolve: name => require(`./Pages/${name}.vue`),
-//   setup({ el, App, props, plugin }) {
-//     const app = createApp({ render: () => h(App, props) })
-//       .use(plugin);
-      
-//     app.component('Data', require('./Pages/Data.vue').default);
-
-//     return app.mount(el);
-//   },
-//   title: (title) => `${title} - ${appName}`,
-// });

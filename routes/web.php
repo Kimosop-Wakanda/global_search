@@ -14,10 +14,6 @@ use App\Http\Controllers\GlobalSearch;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\GlobalSearchController;
 
-// use Inertia\Inertia;
-// use Illuminate\Support\Facades\Route;
-
-
 Route::get('/', function () {
     return redirect('/welcome');
 });
@@ -29,7 +25,6 @@ Route::get('/welcome', function () {
     ]);
 });
 
-Route::get('/data', [DataController::class, 'index']);
 
 
 Route::get('/h', function () {
@@ -52,9 +47,9 @@ Route::middleware([
 });
 
 //Route to show the product
-// Route::get('{slug}', function () {
-//     return Inertia::render('ProductShow')->name('products.show');
-// });
+Route::get('{slug}', function () {
+    return Inertia::render('ProductShow')->name('products.show');
+});
 
 //Route to submit a new product and redirect to show it
 Route::post('products/create', function (Request $request) {
@@ -84,5 +79,5 @@ Route::get('/i', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('search');
 })->middleware(['auth', 'verified'])->name('dashboard');

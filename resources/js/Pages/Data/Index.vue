@@ -2,11 +2,14 @@
   <AppLayout title="Index">
     
     <template #header>
-      <div class="search-container">
-        <input type="text" v-model="state.searchQuery" placeholder="Search" ref="searchInput">
-        <button @click="search">Search</button> 
-      </div>
-    </template>
+  <div class="search-container">
+    <div class="search-wrapper">
+      <input type="text" v-model="state.searchQuery" placeholder="Search" ref="searchInput">
+      <button @click="search">Search</button> 
+    </div>
+  </div>
+</template>
+
 
     <div class="tables-container">
       <div class="table">
@@ -140,3 +143,16 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+</style>
