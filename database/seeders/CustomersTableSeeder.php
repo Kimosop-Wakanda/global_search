@@ -18,13 +18,13 @@ class CustomersTableSeeder extends Seeder
                 'expiry_date' => '2023-06-30',
             ],
             [
-                'first_name' => 'Jane',
+                'first_name' => 'Richie',
                 'last_name' => 'Smith',
-                'username' => 'janesmith',
+                'username' => 'richiesmith',
                 'expiry_date' => '2024-12-15',
             ],
             [
-                'first_name' => 'Richie',
+                'first_name' => 'Rich',
                 'last_name' => 'Mounga',
                 'username' => 'rich',
                 'expiry_date' => '2023-06-30',
@@ -39,13 +39,13 @@ class CustomersTableSeeder extends Seeder
                 'first_name' => 'Rouger',
                 'last_name' => 'shake',
                 'username' => 'rts',
-                'expiry_date' => '2026-02-30',
+                'expiry_date' => '2026-02-03',
             ],
             [
                 'first_name' => 'Rachel',
                 'last_name' => 'ross',
                 'username' => 'ross',
-                'expiry_date' => '2024-04-55',
+                'expiry_date' => '2024-04-11',
             ],
             // add more sample records as needed
         ]);
